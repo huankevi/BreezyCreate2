@@ -101,6 +101,69 @@ class Robot(object):
         self._get_sensor_packet()
 
         return self.robot.sensor_state['wall signal']
+    
+    def getBatteryTemperature(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['temperature']
+   
+    def getLightBumper(self):
+        
+	self._get_sensor_packet()
+        return self.robot.sensor_state['light bumper']
+
+    def getLightBumperFrontLeft(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['light bump front left signal']
+    
+    def getLightBumperCenterLeft(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['light bump center left signal']
+    
+    def getLightBumperLeft(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['light bump left signal']
+
+    def getLightBumperFrontRight(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['light bump front right signal']
+    
+    def getLightBumperCenterRight(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['light bump center right signal']
+    
+    def getLightBumperRight(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['light bump right signal']
+
+    def getBatteryCharge(self):
+        
+	self._get_sensor_packet()
+
+        return self.robot.sensor_state['battery charge']
+
+
+    def getDistance(self):
+        '''
+        Returns the distance that Roomba has traveled in millimeters since the distance it was last requested is sent as a signed 16-bit value, high byte first
+        '''
+
+        self._get_sensor_packet()
+
+        return self.robot.sensor_state['distance']
 
     def _get_sensor_packet(self):
 
