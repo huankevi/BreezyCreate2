@@ -68,7 +68,7 @@ def move(q):
 		direction = direction * -1
 	   elif q.get() == "move":
 		print "move forward"
-		speed(100)
+		#speed(100)
 		#speed(0)
 		# take an image
 		# sleep (x)
