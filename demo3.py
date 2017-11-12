@@ -36,6 +36,10 @@ def step(speed_val, turn_val, time_val):
 def sensewalls(q):
    while True:
    	try:
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0cbb8081005a5129d7a1b5885b4896b54d55cbf2
 	   #print "=========================="
 	   #print "Bumper center left value: %s" % robot.getLightBumperCenterLeft()
 	   #print "Bumper front left value: %s" % robot.getLightBumperFrontLeft()
@@ -48,6 +52,23 @@ def sensewalls(q):
 
 	   if (robot.getLightBumperCenterLeft() > 80 or robot.getLightBumperCenterRight() > 80) and (robot.getLightBumperCenterLeft() > robot.getLightBumperFrontLeft()) and (robot.getLightBumperCenterRight() > robot.getLightBumperFrontRight()):
 			q.put("stop")
+<<<<<<< HEAD
+=======
+=======
+	   print "=========================="
+    	   print "Bumper center left value: %s" % robot.getLightBumperCenterLeft()
+    	   #print "Bumper front left value: %s" % robot.getLightBumperFrontLeft()
+    	   #print "Bumper left value: %s" %  robot.getLightBumperLeft()
+    	   #print "=========================="
+    	   print "Bumper center right value: %s" % robot.getLightBumperCenterRight()
+    	   #print "Bumper front right value: %s" % robot.getLightBumperFrontRight()
+    	   #print "Bumper right value: %s" %  robot.getLightBumperRight()
+    	   print "=========================="
+           	        
+	   if robot.getLightBumperCenterLeft() > 80 or robot.getLightBumperCenterRight() > 80:
+		q.put("stop")
+>>>>>>> 7195c9207860ffd7d4d4861423a7447a8d29b787
+>>>>>>> 0cbb8081005a5129d7a1b5885b4896b54d55cbf2
 	   else:
 		q.put("move")
    	except KeyboardInterrupt:
@@ -58,18 +79,47 @@ def sensewalls(q):
 
 def move(q):
    sleep(1)
+<<<<<<< HEAD
    direction = -1
+=======
+<<<<<<< HEAD
+   direction = -1
+=======
+>>>>>>> 7195c9207860ffd7d4d4861423a7447a8d29b787
+>>>>>>> 0cbb8081005a5129d7a1b5885b4896b54d55cbf2
    while True:
 	try:
 	   if q.get() == "stop":
 		print "stop irobot"
 		speed(0)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 0cbb8081005a5129d7a1b5885b4896b54d55cbf2
 		u_turn(direction)
 		direction = direction * -1
 	   elif q.get() == "move":
 		print "move forward"
+<<<<<<< HEAD
 		#speed(100)
 		#speed(0)
+=======
+		speed(100)
+		#speed(0)
+=======
+		# we need to decide which way to turn
+		print "back away from the wall"
+                speed(-20)
+		speed(0)
+		
+				
+
+	   elif q.get() == "move":
+		print "move forward"
+		speed(100)
+		speed(0)
+>>>>>>> 7195c9207860ffd7d4d4861423a7447a8d29b787
+>>>>>>> 0cbb8081005a5129d7a1b5885b4896b54d55cbf2
 		# take an image
 		# sleep (x)
 	   else:
