@@ -40,12 +40,12 @@ def sensewalls(q):
 	    print "robot.getLightBumperCenterLeft(): %s | robot.getLightBumperCenterRight(): %s" % (robot.getLightBumperCenterLeft(), robot.getLightBumperCenterRight())
 	    print "-----------------------------------------"
 
-	   	if (robot.getLightBumperCenterLeft() > 80 or robot.getLightBumperCenterRight() > 80) and (robot.getLightBumperCenterLeft() > robot.getLightBumperFrontLeft()) and (robot.getLightBumperCenterRight() > robot.getLightBumperFrontRight()):
+	   	if (robot.getLightBumperCenterLeft() > 80 and robot.getLightBumperCenterRight() > 80) and (robot.getLightBumperCenterLeft() > robot.getLightBumperFrontLeft()) and (robot.getLightBumperCenterRight() > robot.getLightBumperFrontRight()):
 			q.put("stop")
 	   	else:
 			q.put("move")
    	except KeyboardInterrupt:
-        speed(0)
+		speed(0)
 		break
    	except Exception, e:
 		print e
