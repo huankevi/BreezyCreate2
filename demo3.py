@@ -47,11 +47,11 @@ def sensewalls(q):
 	   #print "=========================="
 
 	   if (robot.getLightBumperCenterLeft() > 80 or robot.getLightBumperCenterRight() > 80) and (robot.getLightBumperCenterLeft() > robot.getLightBumperFrontLeft()) and (robot.getLightBumperCenterRight() > robot.getLightBumperFrontRight()):
-			q.put("stop")
+		q.put("stop")
 	   else:
-			q.put("move")
+		q.put("move")
    	except KeyboardInterrupt:
-        	speed(0)
+        speed(0)
 		break
    	except Exception, e:
 		print e
@@ -68,7 +68,7 @@ def move(q):
 		direction = direction * -1
 	   elif q.get() == "move":
 		print "move forward"
-		#speed(100)
+		speed(100)
 		#speed(0)
 		# take an image
 		# sleep (x)
