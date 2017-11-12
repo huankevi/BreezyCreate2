@@ -35,20 +35,15 @@ def step(speed_val, turn_val, time_val):
 def sensewalls(q):
    while True:
    	try:
-	   #print "=========================="
-	   #print "Bumper center left value: %s" % robot.getLightBumperCenterLeft()
-	   #print "Bumper front left value: %s" % robot.getLightBumperFrontLeft()
-	   #print "Bumper left value: %s" %  robot.getLightBumperLeft()
-	   #print "=========================="
-	   #print "Bumper center right value: %s" % robot.getLightBumperCenterRight()
-	   #print "Bumper front right value: %s" % robot.getLightBumperFrontRight()
-	   #print "Bumper right value: %s" %  robot.getLightBumperRight()
-	   #print "=========================="
+	   	print "robot.getLightBumperLeft(): %s | robot.getLightBumperRight(): %s" % (robot.getLightBumperLeft(), robot.getLightBumperRight())
+	    print "robot.getLightBumperFrontLeft(): %s | robot.getLightBumperFrontRight(): %s" % (robot.getLightBumperFrontLeft(), robot.getLightBumperFrontRight())
+	    print "robot.getLightBumperCenterLeft(): %s | robot.getLightBumperCenterRight(): %s" % (robot.getLightBumperCenterLeft(), robot.getLightBumperCenterRight())
+	    print "-----------------------------------------"
 
-	   if (robot.getLightBumperCenterLeft() > 80 or robot.getLightBumperCenterRight() > 80) and (robot.getLightBumperCenterLeft() > robot.getLightBumperFrontLeft()) and (robot.getLightBumperCenterRight() > robot.getLightBumperFrontRight()):
-		q.put("stop")
-	   else:
-		q.put("move")
+	   	if (robot.getLightBumperCenterLeft() > 80 or robot.getLightBumperCenterRight() > 80) and (robot.getLightBumperCenterLeft() > robot.getLightBumperFrontLeft()) and (robot.getLightBumperCenterRight() > robot.getLightBumperFrontRight()):
+			q.put("stop")
+	   	else:
+			q.put("move")
    	except KeyboardInterrupt:
         speed(0)
 		break
@@ -63,6 +58,7 @@ def move(q):
 	   if q.get() == "stop":
 		print "stop irobot"
 		speed(0)
+		sleep(2)
 		u_turn(direction)
 		direction = direction * -1
 	   elif q.get() == "move":
