@@ -10,7 +10,6 @@ robot = breezycreate2.Robot(port='/dev/ttyUSB1')
 speed = lambda value: robot.setForwardSpeed(value)
 turn = lambda value: robot.setTurnSpeed(value)
 sleep = lambda value: time.sleep(value)
-direction = 1 # north=1, south =-1
 
 def u_turn(d):
 	if d > 0:
