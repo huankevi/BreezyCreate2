@@ -45,22 +45,18 @@ def sensewalls(q):
 		#print "-----------------------------------------"
 
 		if(robot.getLightBumper()[0] and robot.getLightBumper()[2]):
-			print "Stop at a corner. Wall front and right"
 			q.put("stop_turn_anticlockwise")
 			speed(0)
 			sleep(4)
 		elif(robot.getLightBumper()[5] and robot.getLightBumper()[4] and robot.getLightBumper()[3] and not robot.getLightBumper()[0]):
-			print "Stop at a corner. Wall front and Left"
 			q.put("stop_turn_clockwise")
 			speed(0)
 			sleep(4)
 	   	elif (robot.getLightBumper()[4] or robot.getLightBumper()[1]):
-			print "Stop. Wall front."
 			q.put("stop")
 			speed(0)
 			sleep(4)
 	   	else:
-			print "move!!!"
 			q.put("move")
    	except KeyboardInterrupt:
 		break
@@ -73,9 +69,11 @@ def move(q):
 	try:
 	   if q.get() == "stop":
 		   print "Detected wall in front. Ready to make an u-turn.."
+		   u_turn(direction)
 		   direction = direction * -1
 	   elif q.get() == "stop_turn_clockwise":
 		   print "At a corner. Detected walls in front and left. Ready to make an u-turn clockwise"
+		   u_turn(1)
 		   direction = -1
 	   elif q.get() == "stop_turn_anticlockwise":
 		   print "At a corner. Detected walls in front and right. Ready to make an u-turn anti-clockwise"
