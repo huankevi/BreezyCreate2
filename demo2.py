@@ -121,7 +121,7 @@ if __name__ == '__main__':
     	process_two.join()
 
     except KeyboardInterrupt:
-	print "exiting......."
+	print "keyboardinterrupt received. Exiting the program.."
 	speed(0)
 	turn(0)
 	process_one.terminate()
