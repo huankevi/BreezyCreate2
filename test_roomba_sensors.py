@@ -27,13 +27,17 @@ try:
 	print "robot.getWallSensor(): %s" % robot.getWallSensor()
 	print "robot.getWallSeen(): %s" % robot.getWallSeen()
 	#print robot.getLightBumper()
-	print "robot.getLightBumper() - right  %s" % robot.getLightBumper()[0]
-	print "robot.getLightBumper() - center right  %s" % robot.getLightBumper()[1]
-	print "robot.getLightBumper() - front right  %s" % robot.getLightBumper()[2]
-	print "robot.getLightBumper() - front left  %s" % robot.getLightBumper()[3]
-	print "robot.getLightBumper() - center left  %s" % robot.getLightBumper()[4]
-	print "robot.getLightBumper() - left  %s" % robot.getLightBumper()[5]
-	
+#	print "robot.getLightBumper() - right  %s" % robot.getLightBumper()[0]
+#	print "robot.getLightBumper() - center right  %s" % robot.getLightBumper()[1]
+#	print "robot.getLightBumper() - front right  %s" % robot.getLightBumper()[2]
+#	print "robot.getLightBumper() - front left  %s" % robot.getLightBumper()[3]
+#	print "robot.getLightBumper() - center left  %s" % robot.getLightBumper()[4]
+#	print "robot.getLightBumper() - left  %s" % robot.getLightBumper()[5]
+
+	print "robot.getBumpers() - left %s" % robot.getBumpers()[0]
+	print "robot.getBumpers() - right %s" % robot.getBumpers()[1]
+
+#	
 	sleep(3)
 except KeyboardInterrupt:
   pass
