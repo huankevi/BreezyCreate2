@@ -2,8 +2,6 @@ import breezycreate2
 import os
 import time
 from multiprocessing import Process, Queue
-import signal
-
 
 robot = breezycreate2.Robot(port='/dev/ttyUSB1')
 
@@ -47,7 +45,7 @@ def sensewalls(q):
 		print "-----------------------------------------"
 
 		if(robot.getWallSeen() and robot.getLightBumper()[0] and robot.getLightBumper()[2]):
-			print "Stop at a corner. Wall front and right" 
+			print "Stop at a corner. Wall front and right"
 			q.put("stop_turn_anticlockwise")
 			speed(0)
 			sleep(3.5)
@@ -78,7 +76,7 @@ def move(q):
 		u_turn(direction)
 		direction = direction * -1
 	   elif q.get() == "stop_turn_clockwise":
-		print "At a corner. Detected walls in front and left. Ready to make an u-turn clockwise"		
+		print "At a corner. Detected walls in front and left. Ready to make an u-turn clockwise"
 		u_turn(1)
 		direction = -1
 	   elif q.get() == "stop_turn_anticlockwise":
