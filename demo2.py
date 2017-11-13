@@ -44,12 +44,12 @@ def sensewalls(q):
         	print "robot.getLightBumper() - left  %s" % robot.getLightBumper()[5]
 		print "-----------------------------------------"
 
-		if(robot.getWallSeen() and robot.getLightBumper()[0] and robot.getLightBumper()[2]):
+		if(robot.getLightBumper()[0] and robot.getLightBumper()[2]):
 			print "Stop at a corner. Wall front and right"
 			q.put("stop_turn_anticlockwise")
 			speed(0)
 			sleep(3.5)
-		elif(robot.getLightBumper()[5] and robot.getLightBumper()[4] and robot.getLightBumper()[3] and not robot.getWallSeen()):
+		elif(robot.getLightBumper()[5] and robot.getLightBumper()[4] and robot.getLightBumper()[3] and not robot.getLightBumper()[0]):
 			print "Stop at a corner. Wall front and Left"
 			q.put("stop_turn_clockwise")
 			speed(0)
