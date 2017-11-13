@@ -126,7 +126,7 @@ if __name__ == '__main__':
 	turn(0)
 	process_one.terminate()
 	process_two.terminate()
-	while process_one.is_alive() and process_two.is_alive():
+	while process_one.is_alive() or process_two.is_alive():
 		speed(0)
 		turn(0)
 		print process_one.is_alive()
