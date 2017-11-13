@@ -117,7 +117,13 @@ class Robot(object):
     def getLightBumper(self):
 
 	self._get_sensor_packet()
-        return self.robot.sensor_state['light bumper']
+
+        return self.robot.sensor_state['right'],\
+               self.robot.sensor_state['center right'],\
+               self.robot.sensor_state['front right'],\
+               self.robot.sensor_state['front left'],\
+               self.robot.sensor_state['center left'],\
+               self.robot.sensor_state['left']
 
     def getLightBumperFrontLeft(self):
 
