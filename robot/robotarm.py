@@ -242,9 +242,9 @@ class Robot():
 			array_pos+=1
 		servode.to_goal(self)
  
-        def reset(self, sids):
+        def reset(self):
 		self.sid = []
-		for x in range(sids):
+		for x in range(5):
 			self.sid.append(x+1)
 		self.register = 'torque_enable'
 		self.value = 0
