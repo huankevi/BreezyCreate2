@@ -4,6 +4,7 @@ import time
 import sys
 sys.setrecursionlimit(1500)
 from robot import robotarm
+from robot import rekog
 
 robot = breezycreate2.Robot(port='/dev/ttyUSB1')
 robot_arm = robotarm.Robot()
@@ -61,14 +62,18 @@ def move(uturn, rotation):
 
 	if not uturn:
 		print "move forward"
-        	step(150, 0, 1)
+        	#step(150, 0, 1)
 		speed(0)
 		# read to take an image
-                robot_arm.set_arm_position(450,415,415,510,400)
-                sleep(3)
+		print("Taking an image")
+                robot_arm.set_arm_position(512,415,415,510,450)
+		nose_location = rekog.call_rekog()
+		print "location of the nose is: %s" % nose_location
+
+                #sleep(3)
                 # move back to move ready position
-                robot_arm.set_arm_position(512,600,600,150,200)
-		sleep(2)
+                robot_arm.set_arm_position(512,600,600,150,300)
+		#sleep(2)
 	else:
 		if rotation == 0:
 			print "Detected wall in front. Ready to make an u-turn.."
@@ -88,7 +93,7 @@ if __name__ == '__main__':
 	try:
 		#robot_arm.reset()
 		robot_arm.load_robot_profile(5,1023,400,400,100,1,1)
-		robot_arm.set_arm_position(512,600,600,150,200)
+		robot_arm.set_arm_position(512,600,600,150,450)
 		sensewalls()
 
 	except KeyboardInterrupt:
