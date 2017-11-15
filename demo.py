@@ -66,12 +66,12 @@ def move(uturn, rotation):
 		speed(0)
 		# read to take an image
 		print("Taking an image")
-                robot_arm.set_arm_position(512,415,415,510,450)
+                robot_arm.set_arm_position(450,415,415,510,400)
 		nose_location = rekog.call_rekog()
 		print "location of the nose is: %s" % nose_location
                 sleep(60)
-                # move back to move ready position
-                robot_arm.set_arm_position(512,600,600,150,300)
+                # move back to move ready positio
+                robot_arm.set_arm_position(512,600,600,150,400)
 		#sleep(2)
 	else:
 		if rotation == 0:
