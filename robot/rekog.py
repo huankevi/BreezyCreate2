@@ -20,7 +20,7 @@ def take_image():
 def call_rekog():
 	#location = 0
 	take_image()
-	image_data = open(os.path.join(os.path.dirname( __file__ ), IMG_FILENAME), 'rb')
+	image_data = open(os.path.join(os.path.dirname( __file__ ), '..', IMG_FILENAME), 'rb')
 	print("Image taken, sending it to Rekognition now")
 	resp = reko_client.recognize_celebrities(Image={'Bytes' : image_data.read()})
 	jassy_nose = find_nose_position(resp['CelebrityFaces'],"Andy Jassy")
