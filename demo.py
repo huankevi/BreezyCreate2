@@ -3,7 +3,6 @@ import os
 import time
 import sys
 sys.setrecursionlimit(1500)
-from multiprocessing import Process, Queue
 from robot import robotarm
 
 robot = breezycreate2.Robot(port='/dev/ttyUSB1')
