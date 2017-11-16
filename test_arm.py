@@ -22,7 +22,7 @@ def step(speed_val, turn_val, time_val):
     turn(turn_val)
   sleep(time_val)
 
-os.system("robot/torque_disable.sh")
+#os.system("robot/torque_disable.sh")
 sleep(1)
 os.system("robot/move_position.sh")
 sleep(1)
