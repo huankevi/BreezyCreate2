@@ -3,7 +3,6 @@ import os
 import breezycreate2
 import time
 import picamera
-from robot import servode
 
 IMG_FILENAME = "image.jpg"
 reko_client = boto3.client('rekognition')
@@ -34,8 +33,6 @@ def find_nose_position(all_face_data, name):
 
 def take_image():
 	print("Taking an image using Pycam now ")
-	#os.system('raspistill -ex night -o ./image.jpg')
-
 	with picamera.PiCamera() as camera:
     		camera.flash_mode = 'on'
     		camera.capture('image.jpg')
@@ -122,7 +119,7 @@ def align_X():
 	print "done"
 	step(100,0,0.25)
 	speed(0)
-	os.system("robot/pick_position.sh")
+	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
 
 
 
