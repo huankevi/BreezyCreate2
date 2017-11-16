@@ -17,10 +17,7 @@ def step(speed_val, turn_val, time_val):
   sleep(time_val)
   
 try:
-	print sys.argv[1]
-	distance = float(sys.argv[1]) * 1.5
-	#step(100,0,1.25)
-	step(100,0,distance)
+	step(float(sys.argv[1]),0,float(sys.argv[2]))
 
 
 except KeyboardInterrupt:

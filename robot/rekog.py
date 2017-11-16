@@ -15,16 +15,19 @@ def find_nose_position(all_face_data, name):
 
 def take_image():
 	print("Taking an image using Pycam now ")
-	os.system('raspistill -o ../image.jpg')
+	os.system('raspistill -w 640 -h 480 -q 75 -o ../image.jpg')
 
 def call_rekog():
-	#location = 0
-#	take_image()
-	image_data = open(os.path.join(os.path.dirname( __file__ ), '..', IMG_FILENAME), 'rb')
+	location = 0
+	#take_image()
+	#image_data = open(os.path.join(os.path.dirname( __file__ ), '..', IMG_FILENAME), 'rb')
+	image_data = open("./image.jpg", 'rb')
 	print("Image taken, sending it to Rekognition now")
 	resp = reko_client.recognize_celebrities(Image={'Bytes' : image_data.read()})
 	jassy_nose = find_nose_position(resp['CelebrityFaces'],"Andy Jassy")
 	print('location is', jassy_nose)
+	print('calculating x delta')
+	x_delta = jassy_nose['X'] - 0.3
 	return jassy_nose
 
-#call_rekog()
+call_rekog()

@@ -19,12 +19,9 @@ def step(speed_val, turn_val, time_val):
   sleep(time_val)
   
 try:
-		print sys.argv[1]
-		if sys.argv[1] == "left":
 			
-			step(0,-200,1)
-		else:
-			step(0,200,1)
+	#step(0,100,1)
+	step(0,float(sys.argv[1]),float(sys.argv[2]))
 
 except KeyboardInterrupt:
   pass
