@@ -69,8 +69,10 @@ def move(uturn, rotation):
                 robot_arm.set_arm_position(450,415,415,510,400)
 		nose_location = rekog.call_rekog()
 		print "location of the nose is: %s" % nose_location
-                sleep(60)
-                # move back to move ready positio
+                sleep(2)
+		# set arm to pick position
+		robot_arm.set_arm_position(578,276,276,396,424)
+                # move back to move ready position
                 robot_arm.set_arm_position(512,600,600,150,400)
 		#sleep(2)
 	else:
