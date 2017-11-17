@@ -39,8 +39,11 @@ def find_nose_position(all_face_data, name):
 def take_image():
 	print("Taking an image using Pycam now ")
 	with picamera.PiCamera() as camera:
-    		camera.flash_mode = 'on'
-    		camera.capture('image.jpg')
+		camera.flash_mode = 'on'
+		camera.resolution = (1296, 972)
+		camera.capture('image.jpg')
+		camera.close()
+		
 
 def call_rekog(celeb_name):
 	location = 0
@@ -48,6 +51,7 @@ def call_rekog(celeb_name):
 	image_data = open("./image.jpg", 'rb')
 	print("Celebrity %s image taken, sending it to Rekognition now" % celeb_name)
 	resp = reko_client.recognize_celebrities(Image={'Bytes' : image_data.read()})
+	print resp
 	celeb_nose = find_nose_position(resp['CelebrityFaces'],celeb_name)
 	print('Nose location is', celeb_nose)
 	return celeb_nose
@@ -55,7 +59,8 @@ def call_rekog(celeb_name):
 def align_X(celeb_name):
 	while True:
 		try:
-            object_loc = call_rekog(celeb_name)
+            		object_loc = call_rekog(celeb_name)
+			#return None
 			if object_loc is None:
 				object_loc = call_rekog(celeb_name)
 			print (object_loc['X'] )
@@ -111,7 +116,7 @@ def align_X(celeb_name):
 	print "--y is located--"
 	while True:
 		try:
-            object_loc = call_rekog(celeb_name)
+            		object_loc = call_rekog(celeb_name)
 			if object_loc is None:
 				object_loc = call_rekog(celeb_name)
 			print (object_loc['X'] )
@@ -146,4 +151,5 @@ def align_X(celeb_name):
 
     # we need to detect if we have failed to pick up the object and action to take next
 
-align_X(sys.argv[1])
+if __name__ == '__main__':
+	align_X(sys.argv[1])
