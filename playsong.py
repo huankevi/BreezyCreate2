@@ -73,10 +73,11 @@ MELODY   = [('C4',11,0.3),
             ('E4',11,0.3),
             ('F4',11,0.3),
             ('D4',64,2) ]
-'''
 
+'''
 # Create a Create2. This will automatically try to connect to your robot over serial
-bot = Robot()
+#bot = Robot()
+bot = Robot(port='/dev/ttyUSB1')
 
 # Play the melody
 for triple in MELODY:

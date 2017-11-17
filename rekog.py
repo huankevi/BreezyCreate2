@@ -140,4 +140,4 @@ def align_X():
 	turn(0)
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
 
-align_X()
+#align_X()
