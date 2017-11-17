@@ -23,12 +23,12 @@ def step(speed_val, turn_val, time_val):
   sleep(time_val)
 
 #os.system("robot/torque_disable.sh")
-sleep(1)
+#os.system("robot/load_gg_profile_maker_studio.sh")
+#sleep(2)
 os.system("robot/move_position.sh")
-sleep(1)
+sleep(2)
 os.system("robot/wed_image_pos.sh")
-sleep(1)
-os.system("robot/pick_position.sh")
+#sleep(1)
 
 #print os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh")
 #os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))

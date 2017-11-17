@@ -43,76 +43,94 @@ def call_rekog():
 	image_data = open("./image.jpg", 'rb')
 	print("Image taken, sending it to Rekognition now")
 	resp = reko_client.recognize_celebrities(Image={'Bytes' : image_data.read()})
-	jassy_nose = find_nose_position(resp['CelebrityFaces'],"Andy Jassy")
-	print('location is', jassy_nose)
-	return jassy_nose
+	celeb_nose = find_nose_position(resp['CelebrityFaces'],"Taylor Swift")
+	print('location is', celeb_nose)
+	return celeb_nose
 
 def align_X():
 	while True:
-		object_loc = call_rekog()
-		if object_loc is None:
-			object_loc = call_rekog()
-		print (object_loc['X'] )
-		print (object_loc['Y'] )
-		x_val = float(object_loc['X'])
-		if x_val > 0.32 and x_val < 0.39:
-			print "X is aligned"
-			break
-		print('calculating x delta')
-		x_delta = x_val - 0.3
-		print x_delta
-		if abs(x_delta) < 0.05:
-			break;
-		if x_delta > 0:
-			step(0,100,x_delta)
-			turn(0)
-		else:
-			step(0,-100,(x_delta * -1))
-			turn(0)
+		try:
+                        object_loc = call_rekog()
+			if object_loc is None:
+				object_loc = call_rekog()
+			print (object_loc['X'] )
+                	print (object_loc['Y'] )
+                	x_val = float(object_loc['X'])
+                	#if x_val > 0.32 and x_val < 0.39:
+                	if x_val > 0.38 and x_val < 0.43:
+                        	print "X is aligned"
+                        	break
+                	print('calculating x delta')
+                	x_delta = x_val - 0.3
+                	print x_delta
+                	if abs(x_delta) < 0.05:
+                        	break;
+                	if x_delta > 0:
+                        	step(0,100,x_delta)
+                        	turn(0)
+                	else:
+                        	step(0,-100,(x_delta * -1))
+                        	turn(0)
+                except (RuntimeError, TypeError, NameError):
+                        print "failed to identify the celebrity..."
+                        return None
 		
-	print "x is located"
+	print "--x is located--"
 	while True:
-		object_loc = call_rekog()
-		print (object_loc['X'] )
-		print (object_loc['Y'] )
-		y_val = float(object_loc['Y'])
-		if y_val > 0.69 and y_val < 0.73:
-			print "Y is aligned"
-			break
-		print('calculating y delta')
-		y_delta = y_val - 0.6
-		print y_delta
-		if abs(y_delta) < 0.05:
-			break;
+		try:
+			object_loc = call_rekog()
+			if object_loc is None:
+				object_loc = call_rekog()
+			
+			print (object_loc['X'] )
+			print (object_loc['Y'] )
+			y_val = float(object_loc['Y'])
+			if y_val > 0.69 and y_val < 0.73:
+				print "Y is aligned"
+				break
+			print('calculating y delta')
+			y_delta = y_val - 0.6
+			print y_delta
+			if abs(y_delta) < 0.05:
+				break;
 
-		if y_delta > 0:
-			step(-100,0,y_delta*1)
-			speed(0)
-		else:
-			step(100,0,y_delta * -1.8 )
-			speed(0)
-		
+			if y_delta > 0:
+				step(-100,0,y_delta*1)
+				speed(0)
+			else:
+				step(100,0,y_delta * -1.8 )
+				speed(0)
+		except Exception, e:
+                        print "failed to identify the celebrity..."
+                        return None
+
+	print "--y is located--"	
 	while True:
-		object_loc = call_rekog()
-		if object_loc is None:
-			object_loc = call_rekog()
-		print (object_loc['X'] )
-		print (object_loc['Y'] )
-		x_val = float(object_loc['X'])
-		if x_val > 0.32 and x_val < 0.39:
-			print "X is aligned"
-			break
-		print('calculating x delta')
-		x_delta = x_val - 0.3
-		print x_delta
-		if abs(x_delta) < 0.05:
-			break;
-		if x_delta > 0:
-			step(0,100,x_delta)
-			turn(0)
-		else:
-			step(0,-100,(x_delta * -1))
-			turn(0)
+		try:
+                        object_loc = call_rekog()
+			if object_loc is None:
+				object_loc = call_rekog()
+			print (object_loc['X'] )
+			print (object_loc['Y'] )
+			x_val = float(object_loc['X'])
+			if x_val > 0.38 and x_val < 0.43:
+				print "X is aligned"
+				break
+			print('calculating x delta')
+			x_delta = x_val - 0.3
+			print x_delta
+			if abs(x_delta) < 0.05:
+				break;
+			if x_delta > 0:
+				step(0,100,x_delta)
+				turn(0)
+			else:
+				step(0,-100,(x_delta * -1))
+				turn(0)
+		except Exception, e:
+                        print "failed to identify the celebrity..."
+                        return None
+	
 	final_location = call_rekog()
 	print " -------- "
 	print final_location
@@ -121,7 +139,5 @@ def align_X():
 	speed(0)
 	turn(0)
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
-
-
 
 align_X()
