@@ -17,6 +17,7 @@ X_LOWER = 0.38
 X_UPPER = 0.43
 Y_LOWER = 0.69
 Y_UPPER = 0.73
+turn_x = 0
 
 def step(speed_val, turn_val, time_val):
   if speed_val:
@@ -39,12 +40,12 @@ def find_nose_position(all_face_data, name):
 def take_image():
 	print("Taking an image using Pycam now ")
 	with picamera.PiCamera() as camera:
-		camera.flash_mode = 'on'
-		camera.resolution = (1296, 972)
-		camera.capture('image.jpg')
+        	camera.exposure_mode = 'auto'
+        	#camera.flash_mode = 'on'
+        	camera.resolution = (1296, 972)
+        	camera.capture('image.jpg')
 		camera.close()
 		
-
 def call_rekog(celeb_name):
 	location = 0
 	take_image()
@@ -57,6 +58,7 @@ def call_rekog(celeb_name):
 	return celeb_nose
 
 def align_X(celeb_name):
+	global turn_x
 	while True:
 		try:
             		object_loc = call_rekog(celeb_name)
@@ -66,6 +68,8 @@ def align_X(celeb_name):
 			print (object_loc['X'] )
                 	print (object_loc['Y'] )
                 	x_val = float(object_loc['X'])
+			if x_val > 0.6:
+				turn_x = 0.25
                 	#if x_val > 0.32 and x_val < 0.39:
                 	if x_val > X_LOWER and x_val < X_UPPER:
                         	print "X is aligned"
@@ -146,7 +150,10 @@ def align_X(celeb_name):
 	print "done"
 	step(100,0,0.25)
 	speed(0)
-	turn(0)
+	if turn_x > 0:
+		step(0,100,turn_x)
+	else:
+		turn(0)
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
 
     # we need to detect if we have failed to pick up the object and action to take next
