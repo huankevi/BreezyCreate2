@@ -3,11 +3,8 @@ import os
 import time
 import sys
 sys.setrecursionlimit(1500)
-from robot import robotarm
-from robot import rekog
 
 robot = breezycreate2.Robot(port='/dev/ttyUSB1')
-robot_arm = robotarm.Robot()
 
 speed = lambda value: robot.setForwardSpeed(value)
 turn = lambda value: robot.setTurnSpeed(value)
@@ -62,18 +59,18 @@ def move(uturn, rotation):
 
 	if not uturn:
 		print "move forward"
-        	#step(150, 0, 1)
+        	step(150, 0, 1)
 		speed(0)
 		# read to take an image
 		print("Taking an image")
-                robot_arm.set_arm_position(450,415,415,510,400)
-		nose_location = rekog.call_rekog()
-		print "location of the nose is: %s" % nose_location
-                sleep(2)
+                #robot_arm.set_arm_position(450,415,415,510,400)
+		#nose_location = rekog.call_rekog()
+		#print "location of the nose is: %s" % nose_location
+                #sleep(2)
 		# set arm to pick position
-		robot_arm.set_arm_position(578,276,276,396,424)
+		#robot_arm.set_arm_position(578,276,276,396,424)
                 # move back to move ready position
-                robot_arm.set_arm_position(512,600,600,150,400)
+                #robot_arm.set_arm_position(512,600,600,150,400)
 		#sleep(2)
 	else:
 		if rotation == 0:
@@ -93,8 +90,8 @@ def move(uturn, rotation):
 if __name__ == '__main__':
 	try:
 		#robot_arm.reset()
-		robot_arm.load_robot_profile(5,1023,400,400,100,1,1)
-		robot_arm.set_arm_position(512,600,600,150,450)
+		#robot_arm.load_robot_profile(5,1023,400,400,100,1,1)
+		#robot_arm.set_arm_position(512,600,600,150,450)
 		sensewalls()
 
 	except KeyboardInterrupt:

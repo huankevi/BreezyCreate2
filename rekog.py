@@ -7,7 +7,7 @@ import sys
 
 IMG_FILENAME = "image.jpg"
 reko_client = boto3.client('rekognition')
-robot = breezycreate2.Robot(port='/dev/ttyUSB1')
+robot = breezycreate2.Robot(port='/dev/ttyUSB0')
 
 speed = lambda value: robot.setForwardSpeed(value)
 turn = lambda value: robot.setTurnSpeed(value)
@@ -68,8 +68,6 @@ def align_X(celeb_name):
 			print (object_loc['X'] )
                 	print (object_loc['Y'] )
                 	x_val = float(object_loc['X'])
-			if x_val > 0.6:
-				turn_x = 0.25
                 	#if x_val > 0.32 and x_val < 0.39:
                 	if x_val > X_LOWER and x_val < X_UPPER:
                         	print "X is aligned"
@@ -150,13 +148,19 @@ def align_X(celeb_name):
 	print "done"
 	step(100,0,0.25)
 	speed(0)
-	if turn_x > 0:
-		step(0,100,turn_x)
-	else:
-		turn(0)
+	try:
+		if float(final_location['X']) > 0.340:
+			step(0,100,0.15)
+			turn(0)
+		else:
+			turn(0)
+	except Exception, e:
+                        print "failed to identify the celebrity..."
+                        return None
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
 
-    # we need to detect if we have failed to pick up the object and action to take next
+        # we need to detect if we have failed to pick up the object and action to take next
+	return True	
 
 if __name__ == '__main__':
 	align_X(sys.argv[1])

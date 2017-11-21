@@ -30,7 +30,8 @@ OFF = 0
 
 # Check which port is being used on your controller
 # ex) Windows: "COM1"   Linux: "/dev/ttyUSB0"
-DEVICENAME = "/dev/ttyUSB0".encode('utf-8')
+#DEVICENAME = "/dev/ttyUSB0".encode('utf-8')
+DEVICENAME = "/dev/ttyACM0".encode('utf-8')
 
 COMM_SUCCESS = 0  # Communication Success result value
 COMM_TX_FAIL = -1001  # Communication Tx Failed

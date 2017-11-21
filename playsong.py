@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 from breezycreate2 import Robot
 import time
-
+'''
 # Triples: (note,duration,pause)
 MELODY = [('C4',10,0.2),
          ('C4',13,0.26),
@@ -74,10 +74,10 @@ MELODY   = [('C4',11,0.3),
             ('F4',11,0.3),
             ('D4',64,2) ]
 
-'''
+
 # Create a Create2. This will automatically try to connect to your robot over serial
 #bot = Robot()
-bot = Robot(port='/dev/ttyUSB1')
+bot = Robot(port='/dev/ttyUSB0')
 
 # Play the melody
 for triple in MELODY:
