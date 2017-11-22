@@ -45,7 +45,7 @@ def take_image():
         	camera.resolution = (1296, 972)
         	camera.capture('image.jpg')
 		camera.close()
-		
+
 def call_rekog(celeb_name):
 	location = 0
 	take_image()
@@ -160,7 +160,13 @@ def align_X(celeb_name):
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
 
         # we need to detect if we have failed to pick up the object and action to take next
-	return True	
+	return True
 
 if __name__ == '__main__':
-	align_X(sys.argv[1])
+
+    try:
+        CELEB_NAME = sys.argv[1]
+    except IndexError:
+        print "Usage: search.py \"<celebrity_name>\""
+        print "Default celebrity is Andy Jassy"
+    align_X(CELEB_NAME)

@@ -4,10 +4,10 @@
 #### Operating Instructions:
 
 1. Clone the entire repo to your Raspberry Pi
-2. Verify you have the following device files: `/dev/ttyUSB0` (USB to Serial iRobot interface) and `/dev/ttyACM0` (USB to TTL Dynamixel Servo Interface). If they appear to be different on your system, then update `search.py` and `robot/servode.py` to reflect the correct device filenames.
+2. Verify you have the following device files: `/dev/ttyUSB0` (USB to Serial iRobot interface) and `/dev/ttyACM0` (USB to TTL Dynamixel Servo Interface). If they appear to be different on your system, then update `search.py`, `rekog.py` and `robot/servode.py` to reflect the correct device filenames.
 3. Place the iRobot Create2 in the **center of the demo area**.
 4. Run `ssh robot/load_gg_profile_maker_studio.sh` to set the initial configurations for Servos.
-5. Run `python search.py \"celebrity name\"` e.g. `python search.py \"Angelina Jolie\"`
+5. Run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`
 
 ---
 
@@ -23,29 +23,26 @@ Once you've installed BreezyCreate2, you can access its sole
 class, the <tt>Robot</tt> class, which has easy methods for interacting with the robot: <tt>setForwardSpeed</tt>,
 <tt>playNote</tt>,  <tt>getBumpers</tt>, etc. (See the <tt>robotest.py</tt> script for an example.)
 
-The <tt>roboserver.py</tt> script can be run on a Raspberry Pi or other single-board computer, to control your Create2 over a wireless ad-hoc network.  The corresponding <tt>robotclient.py</tt> script uses a joystick or
-game controller to send commands to the server over the network. The <tt>playsong.py</tt> script will use the Create2 to play a familiar melody.
+#### More interacting methods:
 
-#### Added functions:
+`getWallSeen` - returns a boolean (true | false) when wall sensor value reaches above certain value
 
-`getWallSeen()` - returns a boolean (true | false) when wall sensor value reaches above certain value
+`getBatteryTemperature` - returns the temperature of Roomba’s battery in degrees Celsius.   
 
-`getBatteryTemperature()` - returns the temperature of Roomba’s battery in degrees Celsius.   
+`getLightBumper` - returns a boolean (true | false) when one or more light bumper sensors reaches above certain value
 
-`getLightBumper()` - returns a boolean (true | false) when one or more light bumper sensors reaches above certain value
+`getLightBumperFrontLeft` - returns the strength of the light bump front left signal.
 
-`getLightBumperFrontLeft()` - returns the strength of the light bump front left signal.
+`getLightBumperCenterLeft` - returns the strength of the light bump center left signal.
 
-`getLightBumperCenterLeft()` - returns the strength of the light bump center left signal.
+`getLightBumperLeft` - returns the strength of the light bump left signal.
 
-`getLightBumperLeft()` - returns the strength of the light bump left signal.
+`getLightBumperFrontRight` - returns the strength of the light bump front right signal.
 
-`getLightBumperFrontRight()` - returns the strength of the light bump front right signal.
+`getLightBumperCenterRight` - returns the strength of the light bump center right signal.
 
-`getLightBumperCenterRight()` - returns the strength of the light bump center right signal.
+`getLightBumperRight` - returns the strength of the light bump right signal.
 
-`getLightBumperRight()` - returns the strength of the light bump right signal.
+`getBatteryCharge` - returns the current charge of Roomba’s battery in milliamp-hours (mAh). The charge value decreases as the battery is depleted during running and increases when the battery is charged.
 
-`getBatteryCharge()` - returns the current charge of Roomba’s battery in milliamp-hours (mAh). The charge value decreases as the battery is depleted during running and increases when the battery is charged.
-
-`getDistance()` - Returns the distance that Roomba has traveled in millimeters since the distance it was last requested is sent as a signed 16-bit value, high byte first
+`getDistance` - Returns the distance that Roomba has traveled in millimeters since the distance it was last requested is sent as a signed 16-bit value, high byte first
