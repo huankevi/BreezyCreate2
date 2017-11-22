@@ -55,14 +55,16 @@ def enterserach():
         turn(0)
 
 def exitsearch():
-        step(0, 50, 3.8)
+        step(0, 50, 2.35)
         turn(0)
-        step(100, 0, 2.25)
+        step(100, 0, 2.3)
         speed(0)
+	os.system(os.path.join(os.path.dirname(__file__), "robot", "mike_drop.sh"))
         for triple in BOWOUT_MELODY:
                 robot.playNote(triple[0], triple[1])
                 time.sleep(triple[2])
-
+	os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
+	
 def step(speed_val, turn_val, time_val):
   if speed_val:
     turn(0)
@@ -109,9 +111,9 @@ def sensewalls(q):
 		break
    	except Exception, e:
 		print e
+		break
 
 def move(q):
-   #direction = -1
    while True:
 	try:
 		if q.get() == "stop":
@@ -130,16 +132,21 @@ def move(q):
         		grab_status = rekog.align_X(CELEB_NAME)
         		if grab_status is None:
                 		os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-        		# set arm to move position
-                	#os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-        		#sleep(10)
+			else:
+                		os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position_grab.sh"))
+				sleep(2)
+				exitsearch()
+				print "Job done! Press Ctrl-C to quit the program"
+				break
+        		sleep(2)
 		else:
 			print "in else statement..."
                 	continue
 	except KeyboardInterrupt:
 		break
    	except Exception, e:
-        	print e
+		print e
+		break
 
 if __name__ == '__main__':
     try:
