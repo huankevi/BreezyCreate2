@@ -163,7 +163,7 @@ def align_X(celeb_name):
 	return True
 
 if __name__ == '__main__':
-
+    CELEB_NAME = "Andy Jassy"
     try:
         CELEB_NAME = sys.argv[1]
     except IndexError:
