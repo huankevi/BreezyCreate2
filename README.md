@@ -4,7 +4,7 @@
 #### Operating Instructions:
 
 1. Clone the entire repo to your Raspberry Pi
-2. Verify you have the following device files: `/dev/ttyUSB0` (USB to Serial iRobot interface) and `/dev/ttyACM0` (USB to TTL Dynamixel Servo Interface). If they appear to be different on your system, then update `search.py`, `rekog.py` and `robot/servode.py` to reflect the correct device filenames.
+2. Verify you have the following device files: `/dev/ttyUSB0` (USB to Serial iRobot interface) and `/dev/ttyACM0` (USB to TTL Dynamixel Servo Interface). If they appear to be different on your system, then update `search.py`, `rekog.py` and `robot/servode.py` to reflect the correct device filename.
 3. Place the iRobot Create2 in the **center of the demo area**.
 4. Run `ssh robot/load_gg_profile_maker_studio.sh` to set the initial configurations for Servos.
 5. Run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`

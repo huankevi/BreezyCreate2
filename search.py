@@ -59,20 +59,20 @@ def exitsearch():
         turn(0)
         step(100, 0, 2.3)
         speed(0)
-	os.system(os.path.join(os.path.dirname(__file__), "robot", "mike_drop.sh"))
+	os.system(os.path.join(os.path.dirname(__file__), "robot", "mic_drop.sh"))
         for triple in BOWOUT_MELODY:
                 robot.playNote(triple[0], triple[1])
                 time.sleep(triple[2])
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
 	
 def step(speed_val, turn_val, time_val):
-  if speed_val:
-    turn(0)
-    speed(speed_val)
-  else:
-    speed(0)
-    turn(turn_val)
-  sleep(time_val)
+	if speed_val:
+    		turn(0)
+    		speed(speed_val)
+ 	else:
+    		speed(0)
+    		turn(turn_val)
+  	sleep(time_val)
 
 def sensewalls(q):
    while True:
@@ -136,7 +136,7 @@ def move(q):
                 		os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position_grab.sh"))
 				sleep(2)
 				exitsearch()
-				print "Job done! Press Ctrl-C to quit the program"
+				print "Done! Press Ctrl-C to quit the program"
 				break
         		sleep(2)
 		else:
