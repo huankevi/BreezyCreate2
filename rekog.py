@@ -170,7 +170,7 @@ def align_X(celeb_name):
 			print "Retry %s" % pickup_missed 
 			step(-100,0,0.25)
 			speed(0)
-		        step(0,-100,0.13)
+		        step(0,-100,0.18)
 			turn(0)	
 			sleep(1)
 			os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))
