@@ -35,6 +35,19 @@ BOWOUT_MELODY = [('C4',11,0.3),
             ('F4',11,0.3),
             ('D4',64,2) ]
 
+GAMEOVER_MELODY = [('C4',8,0.4),
+            ('G3',8,0.4),
+            ('E3',12,0.22),
+            ('A3',9,0.22),
+            ('B3',9,0.22),
+            ('A3',9,0.22),
+            ('G#3',12,0.22),
+            ('A#3',12,0.22),
+            ('G#3',12,0.22),
+            ('G3',6,0.18),
+            ('F3',6,0.18),
+            ('G3',100,0)]
+
 def u_turn(d):
 	if d > 0:
         	print "u-turn clockwise"
@@ -54,15 +67,20 @@ def enterserach():
         step(0, 50, 3.55)
         turn(0)
 
-def exitsearch():
+def exitsearch(success_melody):
         step(0, 50, 2.35)
         turn(0)
         step(100, 0, 2.3)
         speed(0)
-	os.system(os.path.join(os.path.dirname(__file__), "robot", "mic_drop.sh"))
-        for triple in BOWOUT_MELODY:
-                robot.playNote(triple[0], triple[1])
-                time.sleep(triple[2])
+        if success_melody:
+		os.system(os.path.join(os.path.dirname(__file__), "robot", "mic_drop.sh"))
+        	for triple in BOWOUT_MELODY:
+                	robot.playNote(triple[0], triple[1])
+                	time.sleep(triple[2])
+	else:
+		for triple in GAMEOVER_MELODY:
+                	robot.playNote(triple[0], triple[1])
+                	time.sleep(triple[2])
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
 	
 def step(speed_val, turn_val, time_val):
@@ -114,39 +132,45 @@ def sensewalls(q):
 		break
 
 def move(q):
-   while True:
-	try:
-		if q.get() == "stop":
-                	print "Detected obstacle.."
-                	speed(0)
-			turn(0)
-           	elif q.get() == "move":
-                	print "searching..."
-			step(65, 0, 2.9)
-        		speed(0)
-        		step(0, 11, 1.8)
-        		turn(0)
-			# read to take an image
-        		print("Taking an image")
-        		os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))
-        		grab_status = rekog.align_X(CELEB_NAME)
-        		if grab_status is None:
-                		os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-			else:
-                		os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position_grab.sh"))
+	while True:
+		try:
+			if q.get() == "stop":
+                		print "Detected obstacle.."
+                		speed(0)
+				turn(0)
+           		elif q.get() == "move":
+                		print "searching..."
+				step(65, 0, 2.9)
+        			speed(0)
+        			step(0, 11, 1.8)
+        			turn(0)
+				# read to take an image
+        			os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))
+        			sleep(2)
+				grab_status = rekog.align_X(CELEB_NAME)
+				print "grab_status is %s" % grab_status
+        			if grab_status is None:
+					os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
+				elif grab_status == True:
+                			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position_grab.sh"))
+					sleep(2)
+					exitsearch(True)
+					print "Done! Press Ctrl-C to quit the program"
+					break
+				else:
+                			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
+					sleep(2)
+					exitsearch(False)
+					print "Failed to pickup after 2 retries. Press Ctrl-C to quit the program"
+					break
 				sleep(2)
-				exitsearch()
-				print "Done! Press Ctrl-C to quit the program"
-				break
-        		sleep(2)
-		else:
-			print "in else statement..."
-                	continue
-	except KeyboardInterrupt:
-		break
-   	except Exception, e:
-		print e
-		break
+			else:
+                		continue
+       		except KeyboardInterrupt:
+			break
+   		except Exception, e:
+			print e
+			break
 
 if __name__ == '__main__':
     try:
@@ -190,5 +214,6 @@ if __name__ == '__main__':
 		turn(0)
 		print process_one.is_alive()
 		print process_two.is_alive()
+	robot.close()
     except Exception, e:
   	print e

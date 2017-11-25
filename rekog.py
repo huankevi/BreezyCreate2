@@ -162,21 +162,29 @@ def align_X(celeb_name):
 
         # we need to detect if we have failed to pick up the object and action to take next
         sleep(0.5)
-	load  = subprocess.check_output(['sh', os.path.join(os.path.dirname(__file__), "robot", "check_present_load.sh")], stderr=subprocess.STDOUT)
+	load = subprocess.check_output(['sh', os.path.join(os.path.dirname(__file__), "robot", "check_present_load.sh")], stderr=subprocess.STDOUT)
 	if int(load) == 0:
 		print "Pick up attempt failed."
-		if pickup_missed < 2:
+		if pickup_missed < 1:
 			pickup_missed += 1
 			print "Retry %s" % pickup_missed 
-			step(-50,0,0.5)
+			step(-100,0,0.25)
 			speed(0)
-			sleep(0.9)
+		        step(0,-100,0.13)
+			turn(0)	
+			sleep(1)
 			os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))
 			align_X(celeb_name)
+		
+		# if retry failed, return 2
+		sleep(0.5)
+		load = subprocess.check_output(['sh', os.path.join(os.path.dirname(__file__), "robot", "check_present_load.sh")], stderr=subprocess.STDOUT)
+		if int(load) == 0:
+			print "Failed. Return to base."
+			return 2
 		else:
-			# if retry 2 times and still unsuccessful, return False
-			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-			return False
+			print "Success. Return to base."
+			return True
 	else:
 		print "Success. Return to base."
 		return True
@@ -188,4 +196,5 @@ if __name__ == '__main__':
     except IndexError:
         print "Usage: search.py \"<celebrity_name>\""
         print "Default celebrity is Andy Jassy"
-    align_X(CELEB_NAME)
+    value = align_X(CELEB_NAME)
+    print "the return value is: %s" % value

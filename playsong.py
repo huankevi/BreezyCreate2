@@ -52,7 +52,6 @@ MELODY = [('C4',10,0.2),
          ('A4',15,0.3),
          ('C5',45,2.2)]
 
-'''
 # Another popular melody
 MELODY   = [('C4',11,0.3),
             ('C4',11,0.3),
@@ -73,9 +72,21 @@ MELODY   = [('C4',11,0.3),
             ('E4',11,0.3),
             ('F4',11,0.3),
             ('D4',64,2) ]
+'''
+MELODY   = [('C4',8,0.4),
+	    ('G3',8,0.4),
+	    ('E3',12,0.22),
+	    ('A3',9,0.22),
+            ('B3',9,0.22),
+            ('A3',9,0.22),
+            ('G#3',12,0.22),
+            ('A#3',12,0.22),
+            ('G#3',12,0.22),
+            ('G3',6,0.18),
+            ('F3',6,0.18),
+            ('G3',100,0)]
 
-
-# Create a Create2. This will automatically try to connect to your robot over serial
+#Create a Create2. This will automatically try to connect to your robot over serial
 #bot = Robot()
 bot = Robot(port='/dev/ttyUSB0')
 
