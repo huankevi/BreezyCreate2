@@ -150,7 +150,7 @@ def align_X(celeb_name):
 	speed(0)
 	try:
 		if float(final_location['X']) > 0.340:
-			step(0,100,0.13)
+			step(0,100,0.18)
 			turn(0)
 		elif float(final_location['X']) < 0.280:
 			step(0,-100,0.18)
