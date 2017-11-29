@@ -151,7 +151,7 @@ def move(q):
 				print "grab_status is %s" % int(grab_status)
         			if int(grab_status) == 1:
 					os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-                    sleep(2)
+                    			sleep(2)
 				elif int(grab_status) == 0:
                 			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position_grab.sh"))
 					sleep(2)
@@ -159,7 +159,7 @@ def move(q):
 					print "Done! Press Ctrl-C to quit the program"
 					break
 				else:
-                			os.system(os.path.join(os.path.dirnaßme(__file__), "robot", "move_position.sh"))
+                			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
 					sleep(2)
 					exitsearch(False)
 					print "Failed to pickup after 1 retry. Press Ctrl-C to quit the program"
