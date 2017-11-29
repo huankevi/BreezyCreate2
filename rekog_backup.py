@@ -44,7 +44,7 @@ def take_image():
 	with picamera.PiCamera() as camera:
         	camera.exposure_mode = 'auto'
         	#camera.flash_mode = 'on'
-        	camera.resolution = (1024, 768)
+        	camera.resolution = (1296, 972)
         	camera.capture('image.jpg')
 		camera.close()
 
@@ -76,7 +76,7 @@ def align_X(celeb_name):
                 	print('Calculating x delta...')
                 	x_delta = x_val - 0.3
                 	print x_delta
-                	if abs(x_delta) < 0.1:
+                	if abs(x_delta) < 0.05:
                         	break;
                 	if x_delta > 0:
                         	step(0,100,x_delta)
@@ -86,7 +86,7 @@ def align_X(celeb_name):
                         	turn(0)
                 except (RuntimeError, TypeError, NameError):
                         print "Rekognition failed to identify the celebrity."
-                        return 1
+                        return None
 
 	print "--x is located--"
 	while True:
@@ -114,34 +114,34 @@ def align_X(celeb_name):
 				speed(0)
 		except Exception, e:
                         print "Rekognition failed to identify the celebrity."
-                        return 1
+                        return None
 
 	print "--y is located--"
-	# while True:
-	# 	try:
-    #         		object_loc = call_rekog(celeb_name)
-	# 		if object_loc is None:
-	# 			object_loc = call_rekog(celeb_name)
-	# 		print (object_loc['X'] )
-	# 		print (object_loc['Y'] )
-	# 		x_val = float(object_loc['X'])
-	# 		if x_val > X_LOWER and x_val < X_UPPER:
-	# 			print "X is aligned"
-	# 			break
-	# 		print('Calculating x delta...')
-	# 		x_delta = x_val - 0.3
-	# 		print x_delta
-	# 		if abs(x_delta) < 0.1:
-	# 			break;
-	# 		if x_delta > 0:
-	# 			step(0,100,x_delta)
-	# 			turn(0)
-	# 		else:
-	# 			step(0,-100,(x_delta * -1))
-	# 			turn(0)
-	# 	except Exception, e:
-    #                     print "Rekognition failed to identify the celebrity."
-    #                     return 1
+	while True:
+		try:
+            		object_loc = call_rekog(celeb_name)
+			if object_loc is None:
+				object_loc = call_rekog(celeb_name)
+			print (object_loc['X'] )
+			print (object_loc['Y'] )
+			x_val = float(object_loc['X'])
+			if x_val > X_LOWER and x_val < X_UPPER:
+				print "X is aligned"
+				break
+			print('Calculating x delta...')
+			x_delta = x_val - 0.3
+			print x_delta
+			if abs(x_delta) < 0.05:
+				break;
+			if x_delta > 0:
+				step(0,100,x_delta)
+				turn(0)
+			else:
+				step(0,-100,(x_delta * -1))
+				turn(0)
+		except Exception, e:
+                        print "Rekognition failed to identify the celebrity."
+                        return None
 
 	final_location = call_rekog(celeb_name)
 	print " ---------------------------------------------------"
@@ -152,43 +152,42 @@ def align_X(celeb_name):
 		if float(final_location['X']) > 0.340:
 			step(0,100,0.13)
 			turn(0)
-		elif float(final_location['X']) < 0.280:
-			step(0,-100,0.18)
-			turn(0)
 		else:
 			turn(0)
 	except Exception, e:
                         print "Rekognition failed to identify the celebrity."
-                        return 1
+                        return None
 	print "Completed Rekognition task."
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "pick_position.sh"))
 
+        # we need to detect if we have failed to pick up the object and action to take next
         sleep(0.5)
 	load = subprocess.check_output(['sh', os.path.join(os.path.dirname(__file__), "robot", "check_present_load.sh")], stderr=subprocess.STDOUT)
 	if int(load) == 0:
 		print "Pick up attempt failed."
 		if pickup_missed < 1:
 			pickup_missed += 1
-			print "Retry %s" % pickup_missed
+			print "Retry %s" % pickup_missed 
 			step(-100,0,0.25)
 			speed(0)
 		        step(0,-100,0.18)
-			turn(0)
+			turn(0)	
 			sleep(1)
 			os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))
 			align_X(celeb_name)
-
+		
 		# if retry failed, return 2
+		sleep(0.5)
 		load = subprocess.check_output(['sh', os.path.join(os.path.dirname(__file__), "robot", "check_present_load.sh")], stderr=subprocess.STDOUT)
 		if int(load) == 0:
 			print "Failed. Return to base."
 			return 2
 		else:
 			print "Success. Return to base."
-			return 0
+			return True
 	else:
 		print "Success. Return to base."
-		return 0
+		return True
 
 if __name__ == '__main__':
     CELEB_NAME = "Andy Jassy"
@@ -198,4 +197,4 @@ if __name__ == '__main__':
         print "Usage: search.py \"<celebrity_name>\""
         print "Default celebrity is Andy Jassy"
     value = align_X(CELEB_NAME)
-    print "the return value is: %s" % int(value)
+    print "the return value is: %s" % value

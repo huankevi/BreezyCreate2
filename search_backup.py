@@ -62,9 +62,9 @@ def u_turn(d):
 
 
 def enterserach():
-        step(100, 0, 2)
+        step(100, 0, 3)
         speed(0)
-        step(0, 50, 3)
+        step(0, 50, 3.55)
         turn(0)
 
 def exitsearch(success_melody):
@@ -82,7 +82,7 @@ def exitsearch(success_melody):
                 	robot.playNote(triple[0], triple[1])
                 	time.sleep(triple[2])
 	os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-
+	
 def step(speed_val, turn_val, time_val):
 	if speed_val:
     		turn(0)
@@ -105,7 +105,7 @@ def sensewalls(q):
         	#print "robot.getLightBumper() - center left  %s" % robot.getLightBumper()[4]
         	#print "robot.getLightBumper() - left  %s" % robot.getLightBumper()[5]
 		#print "-----------------------------------------"
-
+		
 		if robot.getBumpers()[0] or robot.getBumpers()[1]:
 			q.put("stop")
                         speed(0)
@@ -124,7 +124,7 @@ def sensewalls(q):
 			turn(0)
 	   	else:
 			q.put("move")
-
+			
    	except KeyboardInterrupt:
 		break
    	except Exception, e:
@@ -148,23 +148,22 @@ def move(q):
         			os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))
         			sleep(2)
 				grab_status = rekog.align_X(CELEB_NAME)
-				print "grab_status is %s" % int(grab_status)
-        			if int(grab_status) == 1:
+				print "grab_status is %s" % grab_status
+        			if grab_status is None:
 					os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
-                    sleep(2)
-				elif int(grab_status) == 0:
+				elif grab_status == True:
                 			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position_grab.sh"))
 					sleep(2)
 					exitsearch(True)
 					print "Done! Press Ctrl-C to quit the program"
 					break
 				else:
-                			os.system(os.path.join(os.path.dirnaßme(__file__), "robot", "move_position.sh"))
+                			os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
 					sleep(2)
 					exitsearch(False)
-					print "Failed to pickup after 1 retry. Press Ctrl-C to quit the program"
+					print "Failed to pickup after 2 retries. Press Ctrl-C to quit the program"
 					break
-
+				sleep(2)
 			else:
                 		continue
        		except KeyboardInterrupt:
@@ -180,13 +179,13 @@ if __name__ == '__main__':
         	robot.playNote(triple[0], triple[1])
                	time.sleep(triple[2])
        	print "iRobot activated..."
-
+        
 	try:
         	CELEB_NAME = sys.argv[1]
         except IndexError:
                 print "Usage: search.py \"<celebrity_name>\""
                	print "Default celebrity is Andy Jassy"
-
+        
 	print "Celerity Target: %s " % CELEB_NAME
         os.system(os.path.join(os.path.dirname(__file__), "robot", "move_position.sh"))
         sleep(2)
