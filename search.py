@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import breezycreate2
 import os
 import time
@@ -140,9 +142,9 @@ def move(q):
 				turn(0)
            		elif q.get() == "move":
                 		print "searching..."
-				step(65, 0, 2.9)
+				step(65, 0, 1)
         			speed(0)
-        			step(0, 11, 1.8)
+        			step(0, 11, 1)
         			turn(0)
 				# read to take an image
         			os.system(os.path.join(os.path.dirname(__file__), "robot", "wed_image_pos.sh"))

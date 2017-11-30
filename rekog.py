@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import boto3
 import os
 import subprocess
@@ -146,13 +148,13 @@ def align_X(celeb_name):
 	final_location = call_rekog(celeb_name)
 	print " ---------------------------------------------------"
 	print final_location
-	#step(100,0,0.25)
-	#speed(0)
+	step(100,0,0.18)
+	speed(0)
 	try:
-		if float(final_location['X']) > 0.340:
-			step(0,100,0.18)
+		if float(final_location['X']) > 0.270:
+			step(0,100,0.20)
 			turn(0)
-		elif float(final_location['X']) < 0.280:
+		elif float(final_location['X']) < 0.260:
 			step(0,-100,0.18)
 			turn(0)
 		else:
