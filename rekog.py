@@ -76,7 +76,7 @@ def align_X(celeb_name):
                 	print('Calculating x delta...')
                 	x_delta = x_val - 0.3
                 	print x_delta
-                	if abs(x_delta) < 0.1:
+                	if abs(x_delta) < 0.05:
                         	break;
                 	if x_delta > 0:
                         	step(0,100,x_delta)
@@ -131,7 +131,7 @@ def align_X(celeb_name):
 	# 		print('Calculating x delta...')
 	# 		x_delta = x_val - 0.3
 	# 		print x_delta
-	# 		if abs(x_delta) < 0.1:
+	# 		if abs(x_delta) < 0.05:
 	# 			break;
 	# 		if x_delta > 0:
 	# 			step(0,100,x_delta)
@@ -146,8 +146,8 @@ def align_X(celeb_name):
 	final_location = call_rekog(celeb_name)
 	print " ---------------------------------------------------"
 	print final_location
-	step(100,0,0.25)
-	speed(0)
+	#step(100,0,0.25)
+	#speed(0)
 	try:
 		if float(final_location['X']) > 0.340:
 			step(0,100,0.18)
