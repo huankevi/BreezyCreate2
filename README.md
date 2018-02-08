@@ -7,10 +7,12 @@
 2. Verify you have the following device files: `/dev/ttyUSB0` (USB to Serial iRobot interface) and `/dev/ttyACM0` (USB to TTL Dynamixel Servo Interface). If they appear to be different on your system, then update `search.py`, `rekog.py` and `robot/servode.py` to reflect the correct device filename.
 3. Run `ssh robot/load_gg_profile_maker_studio.sh` to set the initial configurations for Servos.
 
-Testing Rekognition capability:
+###### Testing Rekognition capability:
+
 4. Run `python rekog.py "celebrity name"` e.g. `python rekog.py "Angelina Jolie"`
 
-Testing Roomba + Rekognition capability: 
+###### Testing Roomba + Rekognition capability:
+
 5. Place the iRobot Create2 in the **center of the demo area**.
 6. Run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`
 
