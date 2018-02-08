@@ -5,16 +5,22 @@
 
 1. Clone the entire repo to your Raspberry Pi
 2. Verify you have the following device files: `/dev/ttyUSB0` (USB to Serial iRobot interface) and `/dev/ttyACM0` (USB to TTL Dynamixel Servo Interface). If they appear to be different on your system, then update `search.py`, `rekog.py` and `robot/servode.py` to reflect the correct device filename.
-3. Run `sh robot/load_gg_profile_maker_studio.sh` to set the initial configurations for Servos.
+3. From the command line, run `sh robot/load_gg_profile_maker_studio.sh` to set the initial configurations for Servos.
 
 ###### Testing Rekognition capability:
+4. From the command line, run `sh robot/wed_image_pos.sh` to prepare the robotic arm for taking an image
+5. Place the celebrity face object beneath the camera to the left as shown in the image below:
+
 ![Optional Text](../master/image_taking_pos.jpg)
-4. Run `python rekog.py "celebrity name"` e.g. `python rekog.py "Angelina Jolie"`
+
+6. From the command line, run `python rekog.py "celebrity name"` e.g. `python rekog.py "Angelina Jolie"`
 
 ###### Testing iRobot Create2 unit + Rekognition capability:
 
-5. Place the roomba unit in the **center of the demo area**.
-6. Run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`
+7. Place the roomba unit in the **center of the demo area**.
+8. From the command line, run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`
+9. The roomba unit will travel a fixed distance before it came to a stop. The robotic arm will then be extended out and ready to take an image
+10. Place the celebrity face object beneath the camera to the left as shown in the image above.
 
 ---
 
