@@ -11,9 +11,9 @@
 
 4. Run `python rekog.py "celebrity name"` e.g. `python rekog.py "Angelina Jolie"`
 
-###### Testing Roomba + Rekognition capability:
+###### Testing iRobot Create2 unit + Rekognition capability:
 
-5. Place the iRobot Create2 in the **center of the demo area**.
+5. Place the roomba unit in the **center of the demo area**.
 6. Run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`
 
 ---
