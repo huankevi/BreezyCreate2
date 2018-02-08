@@ -17,9 +17,9 @@
 
 ###### Testing iRobot Create2 unit + Rekognition capability:
 
-7. Place the roomba unit in the **center of the demo area**.
+7. Place the roomba unit in the center of the demo area.
 8. From the command line, run `python search.py "celebrity name"` e.g. `python search.py "Angelina Jolie"`
-9. The roomba unit will travel a fixed distance before it came to a stop. The robotic arm will then be extended out and ready to take an image
+9. The roomba unit will travel a fixed distance before it came to a stop and the robotic arm will then be extended out and ready to take an image
 10. Place the celebrity face object beneath the camera to the left as shown in the image above.
 
 ---
