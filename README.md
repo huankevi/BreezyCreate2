@@ -8,7 +8,7 @@
 3. Run `sh robot/load_gg_profile_maker_studio.sh` to set the initial configurations for Servos.
 
 ###### Testing Rekognition capability:
-![Optional Text](../master/image_taking.jpg)
+![Optional Text](../master/image_taking_pos.jpg)
 4. Run `python rekog.py "celebrity name"` e.g. `python rekog.py "Angelina Jolie"`
 
 ###### Testing iRobot Create2 unit + Rekognition capability:
